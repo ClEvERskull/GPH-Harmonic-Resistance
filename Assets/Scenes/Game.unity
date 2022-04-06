@@ -266,12 +266,12 @@ GameObject:
   - component: {fileID: 296135447}
   - component: {fileID: 296135446}
   - component: {fileID: 296135448}
-  - component: {fileID: 296135451}
   - component: {fileID: 296135450}
   - component: {fileID: 296135449}
   - component: {fileID: 296135454}
   - component: {fileID: 296135453}
   - component: {fileID: 296135452}
+  - component: {fileID: 296135451}
   m_Layer: 0
   m_Name: Tilemap
   m_TagString: Untagged
@@ -287,7 +287,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 296135444}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: -0.16, y: -0.04, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 872880180}
@@ -1302,7 +1302,7 @@ BoxCollider2D:
   m_IsTrigger: 0
   m_UsedByEffector: 0
   m_UsedByComposite: 0
-  m_Offset: {x: -7, y: -1.5304856}
+  m_Offset: {x: -7.0274096, y: -1.5913913}
   m_SpriteTilingProperty:
     border: {x: 0, y: 0, z: 0, w: 0}
     pivot: {x: 0, y: 0}
@@ -1313,8 +1313,8 @@ BoxCollider2D:
     adaptiveTiling: 0
   m_AutoTiling: 0
   serializedVersion: 2
-  m_Size: {x: 4.013365, y: 0.9355569}
-  m_EdgeRadius: 0
+  m_Size: {x: 3.528164, y: 0.6442461}
+  m_EdgeRadius: 0.15
 --- !u!61 &296135452
 BoxCollider2D:
   m_ObjectHideFlags: 0
