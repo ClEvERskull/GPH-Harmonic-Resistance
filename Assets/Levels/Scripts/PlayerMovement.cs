@@ -5,7 +5,7 @@ public class PlayerMovement : MonoBehaviour
     [SerializeField] private float speed;
     private Rigidbody2D body;
     private Animator anim;
-    public float jumpAmount = 35;
+    public float jumpAmount = 10;
     public float gravityScale = 10;
     public float fallingGravityScale = 40;
    
@@ -26,8 +26,10 @@ public class PlayerMovement : MonoBehaviour
         else if (horizontalInput < -0.1f)
             transform.localScale = new Vector3(-1, 1, 1);
 
-        if (Input.GetKey(KeyCode.Space))
-            body.velocity = new Vector2(body.velocity.x, speed);
+        if(Input.GetButtonDown("Jump") && Mathf.Abs(body.velocity.y) < 0.001f)
+        {
+            body.AddForce(new Vector2(0, jumpAmount), ForceMode2D.Impulse);
+        }
 
         anim.SetBool("run", horizontalInput != 0);
     }
