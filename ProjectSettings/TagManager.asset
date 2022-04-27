@@ -9,11 +9,11 @@ TagManager:
   - Default
   - TransparentFX
   - Ignore Raycast
-  - 
+  - Player
   - Water
   - UI
-  - 
-  - 
+  - Enemy
+  - Background
   - 
   - 
   - 
@@ -40,11 +40,14 @@ TagManager:
   - 
   m_SortingLayers:
   - name: Background
-    uniqueID: 1538462713
+    uniqueID: 306290775
     locked: 0
   - name: Default
     uniqueID: 0
     locked: 0
-  - name: Mogus
-    uniqueID: 84178099
+  - name: Enemy
+    uniqueID: 2523539351
+    locked: 0
+  - name: Player
+    uniqueID: 1460838047
     locked: 0
