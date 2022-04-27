@@ -51,3 +51,6 @@ TagManager:
   - name: Player
     uniqueID: 1460838047
     locked: 0
+  - name: Gitara
+    uniqueID: 3415354667
+    locked: 0
