@@ -14,7 +14,7 @@ TagManager:
   - UI
   - Enemy
   - Background
-  - 
+  - design
   - 
   - 
   - 
@@ -39,6 +39,9 @@ TagManager:
   - 
   - 
   m_SortingLayers:
+  - name: design
+    uniqueID: 3841752615
+    locked: 0
   - name: Background
     uniqueID: 306290775
     locked: 0
