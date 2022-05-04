@@ -1,5 +1,3 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
 public class Gitara_Attack : MonoBehaviour
@@ -25,11 +23,10 @@ public class Gitara_Attack : MonoBehaviour
         }
     }
     void OnTriggerEnter2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Enemy"))
         {
-            if (collision.CompareTag("Enemy"))
-            {
-                Debug.Log("hit");
-                //collision.GetComponent<Enemy>().TakeDamage(attackDamage);
-            }
+            collision.GetComponent<Enemy>().EnemyTakeDamage(attackDamage);
         }
+    }
 }
