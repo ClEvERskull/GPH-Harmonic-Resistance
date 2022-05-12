@@ -15,7 +15,7 @@ TagManager:
   - Enemy
   - Background
   - design
-  - 
+  - detail
   - 
   - 
   - 
@@ -44,6 +44,9 @@ TagManager:
     locked: 0
   - name: Background
     uniqueID: 306290775
+    locked: 0
+  - name: detail
+    uniqueID: 1945688697
     locked: 0
   - name: Default
     uniqueID: 0
