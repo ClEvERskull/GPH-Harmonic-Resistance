@@ -1,70 +1,52 @@
-
-// using UnityEngine;
-
-// public class EnemyMovement : MonoBehaviour
-// {
-//     public float speed;
-//     public float range;
-//     public float distance;
-//     public Transform target;
-//     public GameObject player;
-//     public LayerMask playerLayers;
-//     public RigidBody2D rb;
-
-//     void Start()
-//     {
-//         player = GameObject.FindGameObjectWithTag("Player");
-//         target = GameObject.FindGameObjectWithTag("Player").GetComponent<Transform>();
-//     }
-
-//     void Update()
-//     {
-//         Close();
-//         if(target.position.x>transform.position.x)
-//         {
-//             transform.localScale = new Vector3(-1.5f, 1.5f, 1.5f);
-//         }
-//         else
-//         {
-//             transform.localScale = new Vector3(1.5f, 1.5f, 1.5f);
-//         }
-//     }
-    
-//     void Close()
-//     {
-//         if(Vector2.Distance(transform.position,target.position)<=distance)
-//         {
-//             Vector3 Dir=target.position - transform.position;
-//             rb.MoveTowards(transform.position + Dir.normalized * speed * Time.deltaTime);
-//             //transform.position = Vector2.MoveTowards(transform.position, target.position, speed * Time.deltaTime);
-//         }
-//     }
-
-//     void OnTriggerEnter2D(Collider2D collision)
-//         {
-//             if (collision.CompareTag("Player"))
-//             {
-//                 Debug.Log("Hit");
-//             }
-//         }
-// }
-
 using UnityEngine;
 
-public class EnemyMovement : MonoBehaviour
+public class Enemy : MonoBehaviour
 {
     public float speed = 10f;
     public float distance;
     public Transform targetToFollow;
     [Range(0, .3f)] [SerializeField] private float m_MovementSmoothing = .05f;  // How much to smooth out the movement
-
+    public float damage = 1f;
     public Rigidbody2D m_Rigidbody2D;
     private bool m_FacingRight;  // For determining which way the player is currently facing.
-    private Vector3 m_Velocity = Vector3.zero;    
+    private Vector3 m_Velocity = Vector3.zero;
+    public float EnemyStartingHealth;
+    public float EnemyCurrentHealth { get; private set; }
+    public Animator animator;
+    public bool PlayerInRange;
+    private float AttackTime;
+    public float AttackSpeed;
+    private Collider2D PlayerCollider;
+    private void Awake()
+    {
+        EnemyCurrentHealth = EnemyStartingHealth;
+    }
 
+    void ManageAttack()
+    {
+        if(PlayerCollider == null)
+        {
+            return;
+        }
+        AttackTime += Time.fixedDeltaTime;
+        if (AttackTime > AttackSpeed)
+        {
+            PlayerCollider.GetComponent<Health>().TakeDamage(damage);
+            AttackTime = 0;
+        }
+    }
     private void FixedUpdate()
     {
-        FollowTarget();
+        if (EnemyCurrentHealth > 0)
+        {
+            FollowTarget();
+            ManageAttack();
+        }
+        else
+        {
+            animator.SetTrigger("EDie");
+            GetComponent<Enemy>().enabled = false;
+        }
     }
 
     public void FollowTarget()
@@ -72,20 +54,23 @@ public class EnemyMovement : MonoBehaviour
         //if there is no target just stay...
         if (targetToFollow == null)
         {
+            //animator.SetBool("Walk", false);
             Move(0);
             return;
         }
         if (Vector2.Distance(transform.position, targetToFollow.position) > distance)
         {
+            //animator.SetBool("Walk", false);
             Move(0);
             return;
         }
-
+        //animator.SetBool("Walk", true);
         float horizontal = targetToFollow.transform.position.x > transform.position.x ? 1f : -1f;
         Move(horizontal);
     }
 
-    public void Move(float move)    {        
+    public void Move(float move)
+    {
 
         // Move the character by finding the target velocity
         Vector3 targetVelocity = new Vector2(move * speed, m_Rigidbody2D.velocity.y);
@@ -120,7 +105,25 @@ public class EnemyMovement : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
-            Debug.Log("hit");
+            PlayerInRange = true;
+            PlayerCollider = collision;
+            AttackTime = AttackSpeed + 1;
+            //collision.GetComponent<Health>().TakeDamage(damage);
         }
+    }
+    void OnTriggerExit2D(Collider2D collision)
+    {
+        if (collision.CompareTag("Player"))
+        {
+            PlayerInRange = false;
+            PlayerCollider = null;
+            //collision.GetComponent<Health>().TakeDamage(damage);
+        }
+    }
+
+    public void EnemyTakeDamage(float _damage)
+    {
+        EnemyCurrentHealth = Mathf.Clamp(EnemyCurrentHealth - _damage, 0, EnemyStartingHealth);
+
     }
 }
