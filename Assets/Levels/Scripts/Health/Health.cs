@@ -1,7 +1,7 @@
 using UnityEngine;
 public class Health : MonoBehaviour
 {
-    [SerializeField] private float startingHealth;
+    [SerializeField] public float startingHealth;
     public float currentHealth { get; private set; }
     private Animator animator;
 
@@ -26,5 +26,10 @@ public class Health : MonoBehaviour
             animator.SetBool("run", false);
         }
     }
+    public void AddHealth(float _value)
+    {
+        currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
+    }
+
 }
 

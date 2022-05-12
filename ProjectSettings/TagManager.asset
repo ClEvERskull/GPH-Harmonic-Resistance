@@ -60,3 +60,6 @@ TagManager:
   - name: Gitara
     uniqueID: 3415354667
     locked: 0
+  - name: Foreground
+    uniqueID: 3016748093
+    locked: 0
