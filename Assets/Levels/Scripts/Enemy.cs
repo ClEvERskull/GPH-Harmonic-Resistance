@@ -54,17 +54,17 @@ public class Enemy : MonoBehaviour
         //if there is no target just stay...
         if (targetToFollow == null)
         {
-            //animator.SetBool("Walk", false);
+            animator.SetBool("Walk", false);
             Move(0);
             return;
         }
         if (Vector2.Distance(transform.position, targetToFollow.position) > distance)
         {
-            //animator.SetBool("Walk", false);
+            animator.SetBool("Walk", false);
             Move(0);
             return;
         }
-        //animator.SetBool("Walk", true);
+        animator.SetBool("Walk", true);
         float horizontal = targetToFollow.transform.position.x > transform.position.x ? 1f : -1f;
         Move(horizontal);
     }
