@@ -4,7 +4,7 @@ public class Health : MonoBehaviour
     [SerializeField] public float startingHealth;
     public float currentHealth { get; private set; }
     private Animator animator;
-
+    public Transform StartPos;
     private void Awake()
     {
         currentHealth = startingHealth;
@@ -22,7 +22,8 @@ public class Health : MonoBehaviour
         else
         {
             animator.SetTrigger("die");
-            GetComponent<PlayerMovement>().enabled = false;
+            transform.position = StartPos.position;
+            currentHealth = startingHealth;
             animator.SetBool("run", false);
         }
     }
@@ -30,6 +31,5 @@ public class Health : MonoBehaviour
     {
         currentHealth = Mathf.Clamp(currentHealth + _value, 0, startingHealth);
     }
-
 }
 
