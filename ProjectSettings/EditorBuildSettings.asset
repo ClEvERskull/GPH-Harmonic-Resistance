@@ -9,6 +9,9 @@ EditorBuildSettings:
     path: Assets/Scenes/prope.unity
     guid: 63c0d2ad153151e49b23d589255bae06
   - enabled: 1
-    path: Assets/Scenes/Game.unity
-    guid: 159e874d600d2d348b181d53107e5485
+    path: Assets/Scenes/Game toto.unity
+    guid: 191efe3e7240c1442bde613b63d0892b
+  - enabled: 0
+    path: 
+    guid: 00000000000000000000000000000000
   m_configObjects: {}

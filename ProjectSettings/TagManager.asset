@@ -5,6 +5,10 @@ TagManager:
   serializedVersion: 2
   tags:
   - Enemy
+  - Voda
+  - CheckPoint
+  - Gitara
+  - Boss
   layers:
   - Default
   - TransparentFX
@@ -16,7 +20,7 @@ TagManager:
   - Background
   - design
   - detail
-  - 
+  - Boss
   - 
   - 
   - 
@@ -53,6 +57,9 @@ TagManager:
     locked: 0
   - name: Enemy
     uniqueID: 2523539351
+    locked: 0
+  - name: Boss
+    uniqueID: 3639311863
     locked: 0
   - name: Player
     uniqueID: 1460838047
