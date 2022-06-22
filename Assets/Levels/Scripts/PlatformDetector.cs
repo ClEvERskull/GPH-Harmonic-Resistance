@@ -33,7 +33,7 @@ public class PlatformDetector : MonoBehaviour
     {
         if (collision.transform.position.y > transform.position.y)
         {
-            collision.transform.SetParent(transform);
+            collision.transform.SetParent(transform); 
         }
     }
     private void OnCollisionExit2D(Collision2D collision)

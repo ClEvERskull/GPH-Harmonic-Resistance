@@ -5,7 +5,6 @@ public class Gitara_Attack : MonoBehaviour
     public Animator animator;
     public LayerMask enemyLayers;
     public int attackDamage = 40;
-
     void Update()
     {
         Attack();

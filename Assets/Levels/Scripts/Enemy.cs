@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class Enemy : MonoBehaviour
 {
@@ -11,12 +12,15 @@ public class Enemy : MonoBehaviour
     private bool m_FacingRight;  // For determining which way the player is currently facing.
     private Vector3 m_Velocity = Vector3.zero;
     public float EnemyStartingHealth;
-    public float EnemyCurrentHealth { get; private set; }
+    public float EnemyCurrentHealth;
     public Animator animator;
     public bool PlayerInRange;
     private float AttackTime;
     public float AttackSpeed;
-    private Collider2D PlayerCollider;
+    public Collider2D PlayerCollider;
+    public Transform respawn;
+    public float Staggertime;
+    private float horizontal;
     private void Awake()
     {
         EnemyCurrentHealth = EnemyStartingHealth;
@@ -65,7 +69,7 @@ public class Enemy : MonoBehaviour
             return;
         }
         animator.SetBool("Walk", true);
-        float horizontal = targetToFollow.transform.position.x > transform.position.x ? 1f : -1f;
+        horizontal = targetToFollow.transform.position.x > transform.position.x ? 1f : -1f;
         Move(horizontal);
     }
 
@@ -103,11 +107,20 @@ public class Enemy : MonoBehaviour
     }
     void OnTriggerEnter2D(Collider2D collision)
     {
+        if (collision.CompareTag("Gitara"))
+        {
+            horizontal = 0;
+            animator.SetBool("Walk", false);
+            animator.SetTrigger("EHit");
+            StartCoroutine(cakaj());
+            FollowTarget();
+        }
         if (collision.CompareTag("Player"))
         {
             PlayerInRange = true;
             PlayerCollider = collision;
             AttackTime = AttackSpeed + 1;
+            animator.SetInteger("EAttack", 1);
             //collision.GetComponent<Health>().TakeDamage(damage);
         }
     }
@@ -115,6 +128,7 @@ public class Enemy : MonoBehaviour
     {
         if (collision.CompareTag("Player"))
         {
+            animator.SetInteger("EAttack", 0);
             PlayerInRange = false;
             PlayerCollider = null;
             //collision.GetComponent<Health>().TakeDamage(damage);
@@ -125,5 +139,9 @@ public class Enemy : MonoBehaviour
     {
         EnemyCurrentHealth = Mathf.Clamp(EnemyCurrentHealth - _damage, 0, EnemyStartingHealth);
 
+    }
+    IEnumerator cakaj()
+    {
+        yield return new WaitForSeconds(Staggertime);
     }
 }
